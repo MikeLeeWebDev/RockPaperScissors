@@ -210,6 +210,8 @@ while (playAgain)
 
 //Console.WriteLine($"\nThank you for playing! \n\n{yourName} Score: {playerScore}\nComputer Score: {computerScore}");
 
+Console.WriteLine("Test");
+
 
 
 
