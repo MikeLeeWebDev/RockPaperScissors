@@ -180,6 +180,8 @@ while (playAgain)
     }
 }
 
+Console.WriteLine("Test");
+
 
 
 
