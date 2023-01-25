@@ -88,7 +88,12 @@ namespace RockPaperScissors.src.Menu
     
         public void EndScoreMenu()
         {
+            Console.WriteLine($"\n{yourName} score: {playerScore}\ncomputer score: {computerScore}");
+            Thread.Sleep(1500);
+            Console.Clear();
+            //Console.WriteLine("Would you like to play again? (Y/N)");
 
+            gameOverSelected = false;
             while (!gameOverSelected)
             {
                 //Console.SetCursorPosition(left, top);

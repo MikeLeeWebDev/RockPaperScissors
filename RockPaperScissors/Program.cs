@@ -14,7 +14,7 @@ ConsoleKeyInfo key;
 ConsoleKeyInfo key2;
 
 var option = 1;
-var gameOver = 1;
+var gameOverOption = 1;
 var isSelected = false;
 var gameOverSelected = false;
 (int left, int top) = Console.GetCursorPosition();
