@@ -1,9 +1,4 @@
 ﻿using RockPaperScissors.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RockPaperScissors.Helpers
 {
@@ -15,67 +10,30 @@ namespace RockPaperScissors.Helpers
             {
                 while (Variables.rockPaperScissorsModeOption == 1 ? Variables.quickRounds : Variables.playerScore < 3 && Variables.computerScore < 3)
                 {
-                    Menu.RockPaperScissorsMenu();
+                    Variables.player = Menu.RockPaperScissorsMenu();
+                    Variables.computer = Functions.GetMoveFromNumber(Variables.random.Next(1, 4));
 
-                    switch (Variables.random.Next(1, 4))
+                    // Get the outcome for the round
+                    Outcome result = Functions.GetOutcome(Variables.player, Variables.computer);
+
+                    Console.WriteLine($"Computer chose {Variables.computer}");
+
+                    switch (result)
                     {
-                        case 1:
-                            Variables.computer = "ROCK";
-                            Console.WriteLine($"Computer choose {Variables.computer}");
-                            if (Variables.player == "ROCK")
+                        case Outcome.Win:
+                            Console.WriteLine("YOU WON!");
+                            Variables.playerScore++;
+                            break;
+                        case Outcome.Draw:
+                            Console.WriteLine("DRAW!");
+                            if (Variables.rockPaperScissorsModeOption == 3)
                             {
-                                Console.WriteLine("DRAW!");
-                                AreYouLuckyScoreMinus();
-                            }
-                            else if (Variables.player == "PAPER")
-                            {
-                                Console.WriteLine("YOU WON!");
-                                Variables.playerScore++;
-                            }
-                            else
-                            {
-                                Console.WriteLine("YOU LOSE!");
-                                Variables.computerScore++;
+                                Variables.playerScore--;
                             }
                             break;
-                        case 2:
-                            Variables.computer = "PAPER";
-                            Console.WriteLine($"Computer choose {Variables.computer}");
-                            if (Variables.player == "ROCK")
-                            {
-                                Console.WriteLine("YOU LOSE!");
-                                Variables.computerScore++;
-                            }
-                            else if (Variables.player == "PAPER")
-                            {
-                                Console.WriteLine("DRAW!");
-                                AreYouLuckyScoreMinus();
-                            }
-                            else
-                            {
-                                Console.WriteLine("YOU WON!");
-                                Variables.playerScore++;
-                            }
-                            break;
-                        case 3:
-                            Variables.computer = "SCISSORS";
-                            Console.WriteLine($"Computer choose {Variables.computer}");
-                            if (Variables.player == "ROCK")
-                            {
-                                Console.WriteLine("YOU WON!");
-                                Variables.playerScore++;
-                            }
-                            else if (Variables.player == "SCISSORS")
-                            {
-                                Console.WriteLine("DRAW!");
-                                AreYouLuckyScoreMinus();
-                            }
-                            else
-                            {
-                                Console.WriteLine("YOU LOSE!");
-                                Variables.computerScore++;
-                            }
-
+                        case Outcome.Lose:
+                            Console.WriteLine("YOU LOSE!");
+                            Variables.computerScore++;
                             break;
                     }
 
@@ -84,18 +42,8 @@ namespace RockPaperScissors.Helpers
                     Console.Clear();
                     Variables.rockPaperScissorsSelecting = true;
                     Variables.quickRounds = false;
-
-
                 }
                 Menu.GameOverMenu();
-            }
-        }
-
-        public static void AreYouLuckyScoreMinus()
-        {
-            if (Variables.rockPaperScissorsModeOption == 3)
-            {
-                Variables.playerScore--;
             }
         }
     }

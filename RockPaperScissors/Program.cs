@@ -1,7 +1,10 @@
 ﻿// SPEL Variabler
 using RockPaperScissors.Helpers;
 using RockPaperScissors.Models;
+using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
+
 
 //Random random = new Random();
 

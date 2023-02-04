@@ -1,9 +1,4 @@
 ﻿using RockPaperScissors.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RockPaperScissors.Helpers
 {
@@ -131,9 +126,9 @@ namespace RockPaperScissors.Helpers
             }
         }
 
-        public static void RockPaperScissorsMenu()
+        public static string RockPaperScissorsMenu()
         {
-            while (Variables.rockPaperScissorsSelecting)
+            while (true)
             {
                 // Might not cursorPosition
                 //Console.SetCursorPosition(left, top);
@@ -144,33 +139,19 @@ namespace RockPaperScissors.Helpers
                 Console.WriteLine($"{(Variables.rockPaperScissorsOption == 3 ? Variables.colorGreen : "")} SCISSORS{Variables.colorDefault}");
 
                 Variables.key = Console.ReadKey();
+                Console.Clear();
 
                 switch (Variables.key.Key)
                 {
                     case ConsoleKey.DownArrow:
-                        Console.Clear();
                         Variables.rockPaperScissorsOption = (Variables.rockPaperScissorsOption == 3 ? 1 : Variables.rockPaperScissorsOption + 1);
                         break;
                     case ConsoleKey.UpArrow:
-                        Console.Clear();
                         Variables.rockPaperScissorsOption = (Variables.rockPaperScissorsOption == 1 ? 3 : Variables.rockPaperScissorsOption - 1);
                         break;
                     case ConsoleKey.Enter:
-                        Console.Clear();
-                        if (Variables.rockPaperScissorsOption == 1)
-                        {
-                            Variables.player = "ROCK";
-                        }
-                        else if (Variables.rockPaperScissorsOption == 2)
-                        {
-                            Variables.player = "PAPER";
-                        }
-                        else
-                        {
-                            Variables.player = "SCISSORS";
-                        }
-                        Variables.rockPaperScissorsSelecting = false;
-                        break;
+                        //switch expressions
+                        return Functions.GetMoveFromNumber(Variables.rockPaperScissorsOption);
                 }
             }
         }
@@ -212,7 +193,7 @@ namespace RockPaperScissors.Helpers
                             }
                             Variables.quickRounds = true;
                             Console.Clear();
-                        } 
+                        }
                         else if (Variables.gameOverOption == 2)
                         {
                             Variables.playAgain = false;
@@ -221,14 +202,14 @@ namespace RockPaperScissors.Helpers
                             Variables.playerScore = 0;
                             Variables.computerScore = 0;
                         }
-                        else 
+                        else
                         {
                             Variables.playAgain = false;
                             Variables.playerScore = 0;
                             Variables.computerScore = 0;
                             Console.Clear();
                             MainMenu();
-                            
+
                         }
                         Variables.gameOverSelecting = false;
 
@@ -238,6 +219,6 @@ namespace RockPaperScissors.Helpers
         }
 
 
-        
+
     }
 }
