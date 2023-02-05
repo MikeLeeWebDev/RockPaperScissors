@@ -36,6 +36,7 @@ public class Variables
     public static Random random = new Random();
 }
 
+// An enum for the different outcomes of a game
 public enum Outcome
 {
     Win,

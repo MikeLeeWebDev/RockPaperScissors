@@ -4,6 +4,7 @@ namespace RockPaperScissors.Helpers
 {
     public class Menu
     {
+        //First menu choices by arrow, switch with outcome of user choice
         public static void MainMenu()
         {
             while (Variables.mainMenuSelecting)
@@ -28,6 +29,7 @@ namespace RockPaperScissors.Helpers
                         break;
                     case ConsoleKey.Enter:
                         Console.Clear();
+                        
                         if (Variables.mainMenuOption == 1)
                         {
                             Variables.playAgain = true;
@@ -47,7 +49,7 @@ namespace RockPaperScissors.Helpers
                 }
             }
         }
-
+        // Menu for game, choice one takes user to ROCK PAPER SCISSORS
         public static void ChooseGameMenu()
         {
             while (Variables.gameMenuSelecting)
@@ -77,14 +79,14 @@ namespace RockPaperScissors.Helpers
                             //Variables.gameMenuSelecting = false;
                             Console.Clear();
                             RockPaperScissorsModeMenu();
-                        }
+                        }                       
                         else if (Variables.gameMenuOption == 2)
                         {
                             NotYetReleased.NotYetReleasedPrompt();
                         }
-                        else
+                        else 
                         {
-                            //Variables.gameMenuSelecting = false;
+                            
                             Console.Clear();
                             MainMenu();
 
@@ -94,7 +96,7 @@ namespace RockPaperScissors.Helpers
                 }
             }
         }
-
+        // Menu that gives different game-modes
         public static void RockPaperScissorsModeMenu()
         {
             while (Variables.rockPaperScissorsModeSelecting)
@@ -125,14 +127,13 @@ namespace RockPaperScissors.Helpers
                 }
             }
         }
-
+        //The actual choice for user when playing the game
+        // the RockPaperScissorsMenu() function is then used in the the class Games.cs to mark the choice of the user 
         public static string RockPaperScissorsMenu()
         {
             while (true)
             {
-                // Might not cursorPosition
-                //Console.SetCursorPosition(left, top);
-
+                // Prints out text for user aka the menu
                 Console.Write("Use Arrow Keys to Choose ROCK, PAPER, OR SCISSORS\n");
                 Console.WriteLine($"{(Variables.rockPaperScissorsOption == 1 ? Variables.colorGreen : "")} ROCK{Variables.colorDefault}");
                 Console.WriteLine($"{(Variables.rockPaperScissorsOption == 2 ? Variables.colorGreen : "")} PAPER{Variables.colorDefault}");
@@ -150,42 +151,54 @@ namespace RockPaperScissors.Helpers
                         Variables.rockPaperScissorsOption = (Variables.rockPaperScissorsOption == 1 ? 3 : Variables.rockPaperScissorsOption - 1);
                         break;
                     case ConsoleKey.Enter:
+
                         //switch expressions
+                        // Returns the result from players choice 
                         return Functions.GetMoveFromNumber(Variables.rockPaperScissorsOption);
                 }
             }
         }
 
+        // Method that runs at the end of the game
         public static void GameOverMenu()
         {
+            // 
             Variables.gameOverSelecting = true;
 
             while (Variables.gameOverSelecting)
             {
-                //Console.SetCursorPosition(left, top);
+                // Prints out text for user aka the menu
                 Console.WriteLine("Would you like to play again? (Y/N)");
+                // Text becomes another color depending on gameOverOption
                 Console.WriteLine($"{(Variables.gameOverOption == 1 ? Variables.colorGreen : "")} YES{Variables.colorDefault}");
                 Console.WriteLine($"{(Variables.gameOverOption == 2 ? Variables.colorRed : "")} NO{Variables.colorDefault}");
                 Console.WriteLine($"{(Variables.gameOverOption == 3 ? Variables.colorGreen : "")} Main Menu{Variables.colorDefault}");
 
+                // Reads in what user press on the keyboard
                 Variables.key = Console.ReadKey();
 
+                // Switch statement to control gameOverOption aka the color of the text in the prompt above
                 switch (Variables.key.Key)
                 {
+                    // Changes gameOverOption value with down arrow key on keyboard
                     case ConsoleKey.DownArrow:
                         Console.Clear();
                         Variables.gameOverOption = (Variables.gameOverOption == 3 ? 1 : Variables.gameOverOption + 1);
                         break;
+                    // Changes gameOverOption value with down arrow key on keyboard
                     case ConsoleKey.UpArrow:
                         Console.Clear();
                         Variables.gameOverOption = (Variables.gameOverOption == 1 ? 3 : Variables.gameOverOption - 1);
                         break;
+                    // Makes a selection in the menu depending on the value of gameOverOption
                     case ConsoleKey.Enter:
                         Console.Clear();
+                        // If gameOverOption is 1 aka "Yes" keeps the while loops as true so the game can be run again
                         if (Variables.gameOverOption == 1)
                         {
                             Variables.playAgain = true;
                             Variables.rockPaperScissorsSelecting = true;
+
                             if (Variables.rockPaperScissorsModeOption != 1)
                             {
                                 Variables.playerScore = 0;
@@ -194,6 +207,7 @@ namespace RockPaperScissors.Helpers
                             Variables.quickRounds = true;
                             Console.Clear();
                         }
+                        // If gameOverOption is 2 aka "No" sets the while loop to false and program ends
                         else if (Variables.gameOverOption == 2)
                         {
                             Variables.playAgain = false;
@@ -202,6 +216,7 @@ namespace RockPaperScissors.Helpers
                             Variables.playerScore = 0;
                             Variables.computerScore = 0;
                         }
+                        // If gameOverOption is 3 aka "Main Menu", returns user to main menu
                         else
                         {
                             Variables.playAgain = false;
